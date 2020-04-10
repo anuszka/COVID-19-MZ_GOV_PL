@@ -11,7 +11,7 @@ On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Minist
 
 * The number of confirmed cases (cumulative) and the number of deaths (cumulative) - in text form, as numbers in tweets.
 * The number of tests performed (cumulative) - as a bitmap image(!)
-* Hospitalized (at the current day), quarantined (at the current day), under surveillance (at the current day), recovered (cumulative) - as another bitmap image(!)
+* Hospitalized (for the current day), quarantined (for the current day), under surveillance (for the current day), recovered (cumulative) - as another bitmap image(!)
 
 I automated downloading these data from Twitter using scripts in Python.
 
@@ -36,12 +36,12 @@ For convenience of users, below I explain the column headers:
 | "Dzień" |  "day"|   since the 1st case | 
 | "Wykryci zakażeni"| "confirmed"|  cumulative| 
 | "Testy" |  "tested"|  cumulative| 
-| "Hospitalizowani" |  "hospitalized"| at the current day, not cumulative| 
+| "Hospitalizowani" |  "hospitalized"| for a given day, not cumulative| 
 | "Zmarli" |  "deaths"|  cumulative| 
-| "Kwarantanna" |  "quarantined"| at the current day, not cumulative| 
-| "Nadzór" |  "surveillance"|   under epidemiological surveillance; at the current day, not cumulative| 
+| "Kwarantanna" |  "quarantined"| for a given day, not cumulative| 
+| "Nadzór" |  "surveillance"|   under epidemiological surveillance; for a given day, not cumulative| 
 | "Testy, wartości przybliżone" |  "tests, approximate"|  there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL; cumulative| 
-| "Kwarantanna po powrocie do kraju" | "quarantined after return to Poland"| at the current day, not cumulative| 
+| "Kwarantanna po powrocie do kraju" | "quarantined after return to Poland"| for a given day, not cumulative| 
 | "Wydarzenia" | "events"| restrictions introduced by Polish government (described in Polish)| 
 | "Wyzdrowiali" |  "recovered"|  cumulative| 
 
@@ -54,14 +54,14 @@ Here, column headers as a dictionary (perhaps this will be useful for copy-pasti
 "Dzień" : "day",  #  since the 1st case 
 "Wykryci zakażeni" : "confirmed",  # cumulative
 "Testy" : "tested",  # cumulative
-"Hospitalizowani" : "hospitalized", # at the current day, not cumulative
+"Hospitalizowani" : "hospitalized", # for a given day, not cumulative
 "Zmarli" : "deaths", # cumulative
-"Kwarantanna" : "quarantined", # at the current day, not cumulative
-"Nadzór" : "surveillance",  # under epidemiological surveillance; at the current day, not cumulative
+"Kwarantanna" : "quarantined", # for a given day, not cumulative
+"Nadzór" : "surveillance",  # under epidemiological surveillance; for a given day, not cumulative
 "Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, 
                                                        # just an approximate number was given 
                                                        # on Twitter @MZ_GOV_PL; cumulative
-"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", # at the current day,
+"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", # for a given day,
                                                                            # not cumulative
 "Wydarzenia" : "events",  # restrictions introduced by Polish government (described in Polish)
 "Wyzdrowiali" : "recovered" # cumulative
