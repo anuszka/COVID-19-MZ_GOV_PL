@@ -29,6 +29,7 @@ The following is a bit inconsistent but for historical reasons:
 * File name: `"cor." + "%Y.%m.%d" + ".csv"`
 
 ### Column headers
+For convenience of users, below I explain the column headers:
 | Polish | English | Comment |
 |--------|---------|---------|
 | "Data" |  "date" |         | 
@@ -44,7 +45,7 @@ The following is a bit inconsistent but for historical reasons:
 | "Wydarzenia" | "events"| restrictions introduced by Polish government (described in Polish)| 
 | "Wyzdrowiali" |  "recovered"|  cumulative| 
 
-For convenience of other users, below I explain the column headers as a dictionary: 
+Here, column headers as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 
 `original_Polish_header : English_translation # comment` 
 
@@ -66,6 +67,8 @@ For convenience of other users, below I explain the column headers as a dictiona
 "Wyzdrowiali" : "recovered" # cumulative
 ```
 #### Restrictions introduced by Polish government
+For convenience of users, below I explain the cells content in the `"Wydarzenia"` ("events") column: 
+
 | Polish | English | Comment |
 |--------|---------|---------|
 |"Zamknięcie szkół i instytucji kulturalnych"| "Closing schools and cultural institutions|
@@ -73,8 +76,7 @@ For convenience of other users, below I explain the column headers as a dictiona
 |"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
 |"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.")|
 
-For convenience of other users, below I explain as a dictionary the cells content in the `"Wydarzenia"` ("events") column: 
-
+Here, cells content in the `"Wydarzenia"` ("events") column as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
 
 ```
