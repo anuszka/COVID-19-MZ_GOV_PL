@@ -67,7 +67,7 @@ Here, column headers as a dictionary (perhaps this will be useful for copy-pasti
 "Wyzdrowiali" : "recovered" # cumulative
 ```
 #### Restrictions introduced by Polish government
-For convenience of users, below I explain the cells content in the `"Wydarzenia"` ("events") column: 
+For convenience of users, below I explain the cells content in `"Wydarzenia"` ("events") column: 
 
 | Polish | English | Comment |
 |--------|---------|---------|
@@ -76,15 +76,15 @@ For convenience of users, below I explain the cells content in the `"Wydarzenia"
 |"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
 |"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.")|
 
-Here, cells content in the `"Wydarzenia"` ("events") column as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
+Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
 
 ```
-"Zamknięcie szkół i instytucji kulturalnych" : "Closing schools and cultural institutions
-"Ogłoszenie stanu epidemii" : "State of epidemic announced"
+"Zamknięcie szkół i instytucji kulturalnych" : "Closing schools and cultural institutions",
+"Ogłoszenie stanu epidemii" : "State of epidemic announced",
 "Dalsze restrykcje (zgromadzenia max 2 os.)" : "Further restrictions (public meetings \
-  not allowed for more than 2 people)"
+  not allowed for more than 2 people)",
 "Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" : \
   "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least \
-  2 m in public, closing of hairdressing salons, etc.")
+  2 m in public, closing of hairdressing salons, etc.)"
 ```
