@@ -9,9 +9,9 @@ On the Ministry of Health website, the <a href="https://www.gov.pl/web/koronawir
 
 On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Ministry of Health shows data in 7 categories in 3 ways:
 
-    The number of confirmed cases (cumulative and the number of deaths (cumulative) - in text form, as numbers in tweets.
-    Number of tests performed - as a bitmap image (!)
-    Hospitalized, quarantined, under surveillance, recovered - as another bitmap image (!)
+* The number of confirmed cases (cumulative and the number of deaths (cumulative) - in text form, as numbers in tweets.
+* The number of tests performed - as a bitmap image(!)
+* Hospitalized, quarantined, under surveillance, recovered - as another bitmap image(!)
 
 I automated downloading these data from Twitter using scripts in Python.
 To read numbers from bitmaps, I used Python packages for image recognition (filter and then OCR).
