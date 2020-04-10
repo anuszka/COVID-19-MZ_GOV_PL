@@ -88,4 +88,3 @@ Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary
   "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least \
   2 m in public, closing of hairdressing salons, etc.)"
 ```
---
