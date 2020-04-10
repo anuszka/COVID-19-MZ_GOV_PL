@@ -19,7 +19,7 @@ I will make the code available in Python soon - when I organize it and improve i
 
 ## CSV file description:
 `data` directory contains CSV files.
-
+### Format
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
 * However, dates in the date column are in American date format: `"%m/%d/%Y"`
