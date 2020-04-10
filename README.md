@@ -15,7 +15,7 @@ On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Minist
 
 I automated downloading these data from Twitter using scripts in Python.
 
-To read numbers from bitmaps, I used Python packages for image recognition (filter and then OCR).
+To read numbers from bitmaps, I used Python packages for image recognition (to filter colors in the background and then to OCR the text).
 
 I will make the code available soon - when I organize it and improve it a bit.
 
