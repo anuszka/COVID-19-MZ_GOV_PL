@@ -30,7 +30,7 @@ For convenience of other users, below I explain the column headers as a dictiona
 "Wyzdrowiali" : "recovered" # cumulative
 ```
 #### Restrictions introduced by Polish government
-For convenience of other users, below I explain the cell content of the `"Wydarzenia"` ("events") column as a dictionary: 
+For convenience of other users, below I explain as a dictionary the cells content in the `"Wydarzenia"` ("events") column: 
 
 `original_Polish_header : English_translation # comment` 
 
