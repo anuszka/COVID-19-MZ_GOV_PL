@@ -12,25 +12,25 @@ Column headers:
 
 >  "Data" : "date", 
 
-  "Dzień" : "day",  #  since the 1st case 
+>   "Dzień" : "day",  #  since the 1st case 
 
-  "Wykryci zakażeni" : "confirmed",  # cumulative
+>   "Wykryci zakażeni" : "confirmed",  # cumulative
 
-  "Testy" : "tested",  # cumulative
+>   "Testy" : "tested",  # cumulative
 
-  "Hospitalizowani" : "hospitalized", 
+>   "Hospitalizowani" : "hospitalized", 
 
-  "Zmarli" : "deaths", 
+>   "Zmarli" : "deaths", 
 
-  "Kwarantanna" : "quarantined", 
+>   "Kwarantanna" : "quarantined", 
 
-  "Nadzór" : "supervised",  # under epidemiological supervision
+>   "Nadzór" : "supervised",  # under epidemiological supervision
 
-  "Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL
+>   "Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL
 
-  "Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
+>   "Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
 
-  "Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
+>   "Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
 
-  "Wyzdrowiali" : "recovered"
+>   "Wyzdrowiali" : "recovered"
 
