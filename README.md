@@ -9,28 +9,17 @@ The following is a bit inconsistent but for historical reasons:
 * File name: "cor." + "%Y.%m.%d" + ".csv"
 
 Column headers: 
-
-  "Data" : "date", 
-
-  "Dzień" : "day",  #  since the 1st case 
-
-  "Wykryci zakażeni" : "confirmed",  # cumulative
-
-  "Testy" : "tested",  # cumulative
-
-  "Hospitalizowani" : "hospitalized", 
-
-  "Zmarli" : "deaths", 
-
-  "Kwarantanna" : "quarantined", 
-
-  "Nadzór" : "supervised",  # under epidemiological supervision
-
-  "Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL
-
-  "Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
-
-  "Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
-
-  "Wyzdrowiali" : "recovered"
-
+```
+"Data" : "date", 
+"Dzień" : "day",  #  since the 1st case 
+"Wykryci zakażeni" : "confirmed",  # cumulative
+"Testy" : "tested",  # cumulative
+"Hospitalizowani" : "hospitalized", 
+"Zmarli" : "deaths", 
+"Kwarantanna" : "quarantined", 
+"Nadzór" : "supervised",  # under epidemiological supervision
+"Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL
+"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
+"Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
+"Wyzdrowiali" : "recovered"
+```
