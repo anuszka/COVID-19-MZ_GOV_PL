@@ -11,7 +11,7 @@ On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Minist
 
 * The number of confirmed cases (cumulative) and the number of deaths (cumulative) - in text form, as numbers in tweets.
 * The number of tests performed (cumulative) - as a bitmap image(!)
-* Hospitalized (at the current day), quarantined (at the current day), under surveillance (at the current day), recovered (cumulative) - as another bitmap image(!)
+* Hospitalized (for the current day), quarantined (for the current day), under surveillance (for the current day), recovered (cumulative) - as another bitmap image(!)
 
 I automated downloading these data from Twitter using scripts in Python.
 
@@ -29,7 +29,23 @@ The following is a bit inconsistent but for historical reasons:
 * File name: `"cor." + "%Y.%m.%d" + ".csv"`
 
 ### Column headers
-For convenience of other users, below I explain the column headers as a dictionary: 
+For convenience of users, below I explain the column headers:
+| Polish | English | Comment |
+|--------|---------|---------|
+| "Data" |  "date" |         | 
+| "Dzień" |  "day"|   since the 1st case | 
+| "Wykryci zakażeni"| "confirmed"|  cumulative| 
+| "Testy" |  "tested"|  cumulative| 
+| "Hospitalizowani" |  "hospitalized"| for a given day, not cumulative| 
+| "Zmarli" |  "deaths"|  cumulative| 
+| "Kwarantanna" |  "quarantined"| for a given day, not cumulative| 
+| "Nadzór" |  "surveillance"|   under epidemiological surveillance; for a given day, not cumulative| 
+| "Testy, wartości przybliżone" |  "tests, approximate"|  there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL; cumulative| 
+| "Kwarantanna po powrocie do kraju" | "quarantined after return to Poland"| for a given day, not cumulative| 
+| "Wydarzenia" | "events"| restrictions introduced by Polish government (described in Polish)| 
+| "Wyzdrowiali" |  "recovered"|  cumulative| 
+
+Here, column headers as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 
 `original_Polish_header : English_translation # comment` 
 
@@ -38,21 +54,29 @@ For convenience of other users, below I explain the column headers as a dictiona
 "Dzień" : "day",  #  since the 1st case 
 "Wykryci zakażeni" : "confirmed",  # cumulative
 "Testy" : "tested",  # cumulative
-"Hospitalizowani" : "hospitalized", # at the current day, not cumulative
+"Hospitalizowani" : "hospitalized", # for a given day, not cumulative
 "Zmarli" : "deaths", # cumulative
-"Kwarantanna" : "quarantined", # at the current day, not cumulative
-"Nadzór" : "surveillance",  # under epidemiological surveillance; at the current day, not cumulative
+"Kwarantanna" : "quarantined", # for a given day, not cumulative
+"Nadzór" : "surveillance",  # under epidemiological surveillance; for a given day, not cumulative
 "Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, 
                                                        # just an approximate number was given 
                                                        # on Twitter @MZ_GOV_PL; cumulative
-"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", # at the current day,
+"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", # for a given day,
                                                                            # not cumulative
-"Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
+"Wydarzenia" : "events",  # restrictions introduced by Polish government (described in Polish)
 "Wyzdrowiali" : "recovered" # cumulative
 ```
 #### Restrictions introduced by Polish government
-For convenience of other users, below I explain as a dictionary the cells content in the `"Wydarzenia"` ("events") column: 
+For convenience of users, below I explain the cells content in the `"Wydarzenia"` ("events") column: 
 
+| Polish | English | Comment |
+|--------|---------|---------|
+|"Zamknięcie szkół i instytucji kulturalnych"| "Closing schools and cultural institutions|
+|"Ogłoszenie stanu epidemii"|"State of epidemic announced"|
+|"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
+|"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.")|
+
+Here, cells content in the `"Wydarzenia"` ("events") column as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
 
 ```
