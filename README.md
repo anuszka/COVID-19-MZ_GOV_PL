@@ -20,12 +20,12 @@ For convenience of other users, below I explain the column headers as a dictiona
 "Dzień" : "day",  #  since the 1st case 
 "Wykryci zakażeni" : "confirmed",  # cumulative
 "Testy" : "tested",  # cumulative
-"Hospitalizowani" : "hospitalized", 
-"Zmarli" : "deaths", 
-"Kwarantanna" : "quarantined", 
-"Nadzór" : "supervised",  # under epidemiological supervision
-"Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL
-"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
+"Hospitalizowani" : "hospitalized", # at the current day, not cumulative
+"Zmarli" : "deaths", # cumulative
+"Kwarantanna" : "quarantined", # at the current day, not cumulative
+"Nadzór" : "supervised",  # under epidemiological supervision; at the current day, not cumulative
+"Testy, wartości przybliżone" : "tests, approximate",  # there were no data for one day, just an approximate number was given on Twitter @MZ_GOV_PL; cumulative
+"Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", # at the current day, not cumulative
 "Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
-"Wyzdrowiali" : "recovered"
+"Wyzdrowiali" : "recovered" # cumulative
 ```
