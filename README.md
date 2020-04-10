@@ -14,9 +14,12 @@ On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Minist
 * Hospitalized (at the current day), quarantined (at the current day), under surveillance (at the current day), recovered (cumulative) - as another bitmap image(!)
 
 I automated downloading these data from Twitter using scripts in Python.
-To read numbers from bitmaps, I used Python packages for image recognition (filter and then OCR).
-I will make the code available in Python soon - when I organize it and improve it a bit.
 
+To read numbers from bitmaps, I used Python packages for image recognition (filter and then OCR).
+
+I will make the code available soon - when I organize it and improve it a bit.
+
+Data in other columns were entered manually.
 ## CSV file description:
 `data` directory contains CSV files.
 ### Format
