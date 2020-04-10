@@ -1,14 +1,20 @@
 # COVID-19-MZ_GOV_PL
 COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL
 
-CSV file:
+`data` directory contains CSV files.
+
+## CSV file description:
 
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
 * However, dates in the date column are in American date format: '%m/%d/%Y'
 * File name: "cor." + "%Y.%m.%d" + ".csv"
 
-Column headers: 
+### Column headers
+For convenience of other users, below I explain the column headers as a dictionary: 
+
+`original_Polish_header : English_translation # comment` 
+
 ```
 "Data" : "date", 
 "Dzień" : "day",  #  since the 1st case 
