@@ -10,7 +10,7 @@ The following is a bit inconsistent but for historical reasons:
 
 Column headers: 
 
-  "Data" : "date", 
+>  "Data" : "date", 
 
   "Dzień" : "day",  #  since the 1st case 
 
