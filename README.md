@@ -30,7 +30,7 @@ Column headers:
 
   "Kwarantanna po powrocie do kraju" : "quarantined after return to Poland", 
 
-  "Wydarzenia" : "events",  # restrictions introduced by Polish government
+  "Wydarzenia" : "events",  # restrictions introduced by Polish government (description in Polish)
 
   "Wyzdrowiali" : "recovered"
 
