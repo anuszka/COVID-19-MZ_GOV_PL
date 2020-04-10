@@ -5,8 +5,7 @@ CSV file:
 
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
-* However, dates in the date column are in American date format:
-        myfile_date_format = '%m/%d/%Y'
+* However, dates in the date column are in American date format: '%m/%d/%Y'
 * File name: "cor." + "%Y.%m.%d" + ".csv"
 
 Column headers: 
