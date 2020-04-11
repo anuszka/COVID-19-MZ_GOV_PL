@@ -21,7 +21,7 @@ I will make the code available soon - when I organize it and improve it a bit.
 
 Data in other columns were entered manually.
 ## Data
-### Where are the data?
+### Where are the data
 `data` directory contains CSV files with the data on COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL.
 ### CSV file description
 #### Format
