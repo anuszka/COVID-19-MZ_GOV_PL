@@ -42,8 +42,10 @@ import numpy as np
 from datetime import date, datetime, timedelta
 import matplotlib.dates as mdates
 import glob
+import sys 
 #######################################################################################
-
+exec(open('TwitterCaptureOther_functions.py').read())
+#######################################################################################
 
 # CSV data path
 path = "../data/"
@@ -66,9 +68,11 @@ end = '\(wszystkie pozytywne przypadki/w tym osoby zmarłe\)'
 
 # Create a dictionary of tweets
 tweets = []
+print_spacer()
 print("Getting tweets from", twitter_user, "...")
 for i in get_tweets(twitter_user, pages=pages_number):
     tweets.append(i) 
+
 
 # Convert tweets to pandas.DataFrame
 df=pd.DataFrame.from_dict(tweets)
@@ -144,19 +148,7 @@ df_confirmed_deaths_to_export.to_csv (captured_data_file_name, index = False, he
 # 
 # Automatically find the previous data file
 i=0
-while i<7:
-    # Get a time stamp i days from now
-    date_i_days_ago = datetime.now() - timedelta(days=i)
-    # Format the time stamp
-    day_str = date_i_days_ago.strftime("%Y.%m.%d")
-    # This should be the name of the data file created i days ago (if it exists)
-    filename = path + "cor." + day_str+".csv"
-    # Check if the data file created i days ago exists
-    file_found =  glob.glob(filename)
-    if file_found:
-        print("Last local data file found:" , file_found[0])
-        i=7
-    i=i+1
+filename = find_last_local_data_file()
 
 
 # For some reason, I can't use the result of glob.glob(filename) above (why?)
@@ -166,8 +158,12 @@ new_csv_file_name = path + "cor." + today_str + ".csv"
 # Read the latest existing CSV data file
 myfile_df = pd.read_csv(old_csv_file_name)
 
+
 # Show part of the old csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython
+# Display more columns in Ipython
+pd.set_option('display.max_columns', 20)
+pd.set_option('display.max_colwidth', 10)
 display(myfile_df[30:45])
 
 
@@ -241,8 +237,8 @@ while twitter_increment_index<last_twitter_index-1:
     # Try to go to the previous day in Twitter data: move by one row
     twitter_increment_index = twitter_increment_index + 1
 
+print_message("Captured data written to local data file:", captured_data_file_name)
 
-print("Captured data written to local data file:", captured_data_file_name)
 # Show the captured data
 # Works in Jupyter notebook / IPython
 display(df_confirmed_deaths_to_export)
@@ -250,7 +246,8 @@ display(df_confirmed_deaths_to_export)
 
 # Export the updated file to CSV
 myfile_df.to_csv(new_csv_file_name, index=False)
-print("Update written to local data file:", new_csv_file_name)
+
+print_message("Update written to local data file:", new_csv_file_name)
 
 # Show part of the new csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython

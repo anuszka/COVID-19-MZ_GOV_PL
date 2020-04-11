@@ -42,6 +42,7 @@ from datetime import date, datetime, timedelta
 import matplotlib.dates as mdates
 import glob
 import requests
+import sys 
 #######################################################################################
 
 # OCR image type 1 
@@ -50,6 +51,8 @@ import requests
 exec(open('../code/TwitterCaptureImages_functions.py').read())
 # import TwitterCaptureImages_functions # For some reason, this doesn't work in my Jupyter notebook...(?)
 ############################################################################################################
+exec(open('TwitterCaptureOther_functions.py').read())
+#######################################################################################
 
 # CSV data path
 path = "../data/"
@@ -60,11 +63,14 @@ imgpath = "../twitter_images/"
 # Path to the directory for captured data (CSV)
 twitter_data_path = "../twitter_captured_data/"
 
+# Error log path
+err_log_path = "../ocr_errors/"
+
 # Twitter user account
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=3
+pages_number=1
 
 
 # Strings to find in tweets
@@ -75,6 +81,7 @@ start = 'Dzienny raport o'
 
 # Create a dictionary of tweets
 tweets = []
+print_spacer()
 print("Getting tweets from", twitter_user, "...")
 for i in get_tweets(twitter_user, pages=pages_number):
     tweets.append(i) 
@@ -82,8 +89,6 @@ for i in get_tweets(twitter_user, pages=pages_number):
 
 # Convert tweets to pandas.DataFrame
 df=pd.DataFrame.from_dict(tweets)
-
-# display(df)
 
 # Select rows in df which contain the string defined in the start variable
 # and create df_hqsr (our twitter data frame)
@@ -93,6 +98,9 @@ df_hqsr=df[df['text'].str.contains(start, na=False)]
 # Add a new column to the twitter data frame: 'tested' 
 df_hqsr = df_hqsr.reindex(
     df_hqsr.columns.tolist() + ['hospitalized','quarantined','supervised','recovered'], axis=1) 
+
+# Open error log file
+errlogfile = open(err_log_path + 'OCR_errors.log', 'a')
 
 # Download images that contain data
 # Find the numbers of tested in the images.
@@ -114,7 +122,7 @@ for index, row in df_hqsr.iterrows():
     # number_list contains: hospitalized, quarantined, supervised, recovered
     numbers = ocr_hqsr(img_file_name)
     labels=['hospitalized', 'quarantined', 'supervised', 'recovered']
-    
+
     # Create a dictionary from two lists
     labels_numbers = {labels[i]: numbers[i] for i in range(len(labels))} 
     
@@ -127,8 +135,11 @@ for index, row in df_hqsr.iterrows():
             df_hqsr.loc[index,label] = int(number_str)
         else:
             df_hqsr.loc[index,label] = number_str
-            print("Warning! ", label, ":", number_str, " is not a number in", img_file_name )
-
+            error_message_str = datetime.now().strftime("%Y.%m.%d %H:%M:%S")+ " OCR error! "+ label+ " : "+ number_str+ " is not a number in "+ img_file_name 
+            print(error_message_str, file = errlogfile)
+            print(error_message_str ,file = sys.stderr)
+# Close error log file
+errlogfile.close()
 
 # For some reason, the numbers entered to columns are float...    
 # Convert the 'tested' column to int  
@@ -150,20 +161,7 @@ df_hqsr_to_export.to_csv (captured_data_file_name, index = False, header=True)
 # Update the existing CSV data file
 # 
 # Automatically find the previous data file
-i=0
-while i<7:
-    # Get a time stamp i days from now
-    date_i_days_ago = datetime.now() - timedelta(days=i)
-    # Format the time stamp
-    day_str = date_i_days_ago.strftime("%Y.%m.%d")
-    # This should be the name of the data file created i days ago (if it exists)
-    filename = path + "cor." + day_str+".csv"
-    # Check if the data file created i days ago exists
-    file_found =  glob.glob(filename)
-    if file_found:
-        print("Last local data file found:" , file_found[0])
-        i=7
-    i=i+1
+filename = find_last_local_data_file()
 
 
 # For some reason, I can't use the result of glob.glob(filename) above (why?)
@@ -175,6 +173,9 @@ myfile_df = pd.read_csv(old_csv_file_name)
 
 # Show part of the old csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython
+# Display more columns in Ipython
+pd.set_option('display.max_columns', 20)
+pd.set_option('display.max_colwidth', 10)
 display(myfile_df[30:45])
 
 
@@ -265,8 +266,10 @@ while twitter_increment_index<=last_twitter_index:
 #     #print(myfile_date, twitter_date)
       
 
-print("Captured images written to local directory", imgpath)
-print("Captured data written to local data file:", captured_data_file_name)
+print_message("Captured images written to local directory:", imgpath)
+
+print_message("Captured data written to local data file:", captured_data_file_name)
+
 # Show the captured data
 # Works in Jupyter notebook / IPython
 display(df_hqsr_to_export)        
@@ -274,7 +277,9 @@ display(df_hqsr_to_export)
 
 # Export the updated file to CSV
 myfile_df.to_csv(new_csv_file_name, index=False)
-print("Update written to local data file:", new_csv_file_name)
+
+print_message("Update written to local data file:", new_csv_file_name)
+
 
 # Show part of the new csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython

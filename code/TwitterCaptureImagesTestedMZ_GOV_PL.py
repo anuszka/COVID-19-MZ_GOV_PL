@@ -42,12 +42,15 @@ from datetime import date, datetime, timedelta
 import matplotlib.dates as mdates
 import glob
 import requests
+import sys 
 #######################################################################################
 # OCR image type 2
 # ocr_t(path_filename_in_)
 # returns: tested
 exec(open('TwitterCaptureImages_functions.py').read())
 # import TwitterCaptureImages_functions # For some reason, this doesn't work in my Jupyter notebook...(?)
+#######################################################################################
+exec(open('TwitterCaptureOther_functions.py').read())
 #######################################################################################
 
 # CSV data path
@@ -63,7 +66,7 @@ twitter_data_path = "../twitter_captured_data/"
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=3
+pages_number=1
 
 
 # Strings to find in tweets
@@ -74,6 +77,7 @@ start = 'W ciągu doby wykonano'
 
 # Create a dictionary of tweets
 tweets = []
+print_spacer()
 print("Getting tweets from", twitter_user, "...")
 for i in get_tweets(twitter_user, pages=pages_number):
     tweets.append(i) 
@@ -82,7 +86,6 @@ for i in get_tweets(twitter_user, pages=pages_number):
 # Convert tweets to pandas.DataFrame
 df=pd.DataFrame.from_dict(tweets)
 
-# display(df)
 
 # Select rows in df which contain the string defined in the start variable
 # and create df_tested (our twitter data frame)
@@ -138,19 +141,7 @@ df_tested_to_export.to_csv (captured_data_file_name, index = False, header=True)
 # 
 # Automatically find the previous data file
 i=0
-while i<7:
-    # Get a time stamp i days from now
-    date_i_days_ago = datetime.now() - timedelta(days=i)
-    # Format the time stamp
-    day_str = date_i_days_ago.strftime("%Y.%m.%d")
-    # This should be the name of the data file created i days ago (if it exists)
-    filename = path + "cor." + day_str+".csv"
-    # Check if the data file created i days ago exists
-    file_found =  glob.glob(filename)
-    if file_found:
-        print("Last local data file found:" , file_found[0])
-        i=7
-    i=i+1
+filename = find_last_local_data_file()
 
 
 # For some reason, I can't use the result of glob.glob(filename) above (why?)
@@ -162,6 +153,9 @@ myfile_df = pd.read_csv(old_csv_file_name)
 
 # Show part of the old csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython
+# Display more columns in Ipython
+pd.set_option('display.max_columns', 20)
+pd.set_option('display.max_colwidth', 10)
 display(myfile_df[30:45])
 
 
@@ -240,9 +234,11 @@ while twitter_increment_index<last_twitter_index:
 #         twitter_date = df_tested.loc[newest_twitter_index+twitter_increment_index,'time']\
 #            .strftime(myfile_date_format)   
 #     #print(myfile_date, twitter_date)
-      
-print("Captured images written to local directory", imgpath)    
-print("Captured data written to local data file:", captured_data_file_name)
+
+   
+print_message("Captured images written to local directory:", imgpath)
+print_message("Captured data written to local data file:", captured_data_file_name)
+
 # Show the captured data
 # Works in Jupyter notebook / IPython        
 display(df_tested_to_export)

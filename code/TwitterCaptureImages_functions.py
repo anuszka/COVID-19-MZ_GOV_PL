@@ -124,4 +124,4 @@ def ocr_t(path_filename_in_):
     # Convert to int; Only the 0-th element in the list is an actual number
     testy = int(output_list[0])
     return testy
-#######################################################################################""" 
+#######################################################################################
