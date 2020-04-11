@@ -17,18 +17,18 @@ I automated downloading these data from Twitter using scripts in Python.
 
 To read numbers from bitmaps, I used Python packages for image recognition (to filter colors in the background and then to OCR the text).
 
-I will make the code available soon - when I organize it and improve it a bit.
-
 Data in other columns were entered manually.
-## CSV file description:
-`data` directory contains CSV files.
-### Format
+## Data
+### Where are the data
+`data` directory contains CSV files with the data on COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL.
+### CSV file description
+#### Format
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
 * However, dates in the date column are in American date format: `"%m/%d/%Y"`
 * File name: `"cor." + "%Y.%m.%d" + ".csv"`
 
-### Column headers
+#### Column headers
 For convenience of users, below I explain the column headers:
 | Polish | English | Comment |
 |--------|---------|---------|
@@ -74,7 +74,7 @@ For convenience of users, below I explain the cells content in `"Wydarzenia"` ("
 |"Zamknięcie szkół i instytucji kulturalnych"| "Closing schools and cultural institutions|
 |"Ogłoszenie stanu epidemii"|"State of epidemic announced"|
 |"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
-|"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.")|
+|"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.)"|
 
 Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
