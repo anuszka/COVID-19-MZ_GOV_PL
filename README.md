@@ -21,15 +21,16 @@ I will make the code available soon - when I organize it and improve it a bit.
 
 Data in other columns were entered manually.
 ## Data
-### CSV file description
+### Where are the data?
 `data` directory contains CSV files with the data on COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL.
-### Format
+### CSV file description
+#### Format
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
 * However, dates in the date column are in American date format: `"%m/%d/%Y"`
 * File name: `"cor." + "%Y.%m.%d" + ".csv"`
 
-### Column headers
+#### Column headers
 For convenience of users, below I explain the column headers:
 | Polish | English | Comment |
 |--------|---------|---------|
