@@ -8,9 +8,12 @@
 # My anaconda environment for Python 3.6:
 myenv_name=python3.6
 
+cd ./code 
 
-conda run -n $myenv_name ipython ./code/TwitterCaptureMZ_GOV_PL.py
+conda run -n $myenv_name ipython ./TwitterCaptureMZ_GOV_PL.py
 
-conda run -n $myenv_name ipython ./code/TwitterCaptureImagesTestedMZ_GOV_PL.py
+conda run -n $myenv_name ipython ./TwitterCaptureImagesTestedMZ_GOV_PL.py
 
-conda run -n $myenv_name ipython ./code/TwitterCaptureImagesHQSR-MZ_GOV_PL.py
+conda run -n $myenv_name ipython ./TwitterCaptureImagesHQSR-MZ_GOV_PL.py
+
+cd ..
