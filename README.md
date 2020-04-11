@@ -18,6 +18,10 @@ I automated downloading these data from Twitter using scripts in Python.
 To read numbers from bitmaps, I used Python packages for image recognition (to filter colors in the background and then to OCR the text).
 
 Data in other columns were entered manually.
+
+**Caution!** Image recognition is not perfect. The images posted by the Ministry of Health are not quite easy to OCR. The numbers appear against the background of circles and underlines. Someone with more experience may try to deal with it using predefined patterns for digits because the font does not change on images. But I used only simple tools. As a result, OCR may fail sometimes. If non-digit characters show up in the data file entries, such entries need to be corrected manually. (I am going to enable error logs in future versions, such that the user will know what to correct.)
+
+
 ## Data
 ### Where are the data
 `data` directory contains CSV files with the data on COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL.
