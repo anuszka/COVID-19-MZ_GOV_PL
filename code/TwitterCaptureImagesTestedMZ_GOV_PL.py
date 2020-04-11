@@ -1,4 +1,4 @@
-""" 
+"""
 Author: Anna Ochab-Marcinek 
 ochab@ichf.edu.pl
 http://groups.ichf.edu.pl/ochab
@@ -46,7 +46,7 @@ import requests
 # OCR image type 2
 # ocr_t(path_filename_in_)
 # returns: tested
-exec(open('../code/TwitterCaptureImages_functions.py').read())
+exec(open('TwitterCaptureImages_functions.py').read())
 # import TwitterCaptureImages_functions # For some reason, this doesn't work in my Jupyter notebook...(?)
 #######################################################################################
 
@@ -129,6 +129,7 @@ today = date.today()
 today_str = today.strftime("%Y.%m.%d")
 
 captured_data_file_name = twitter_data_path+"TCTestedMZ_GOV_PL."+today_str+".csv"
+
 df_tested_to_export.to_csv (captured_data_file_name, index = False, header=True)
 
 
