@@ -20,8 +20,9 @@ To read numbers from bitmaps, I used Python packages for image recognition (to f
 I will make the code available soon - when I organize it and improve it a bit.
 
 Data in other columns were entered manually.
-## CSV file description:
-`data` directory contains CSV files.
+## Data
+### CSV file description
+`data` directory contains CSV files with the data on COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter @MZ_GOV_PL.
 ### Format
 The following is a bit inconsistent but for historical reasons: 
 * Column names are in Polish; in particular, the date column name is 'Data'. 
