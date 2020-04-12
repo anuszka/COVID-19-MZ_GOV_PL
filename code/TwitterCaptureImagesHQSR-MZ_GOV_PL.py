@@ -42,7 +42,8 @@ from datetime import date, datetime, timedelta
 import matplotlib.dates as mdates
 import glob
 import requests
-import sys 
+import sys
+import os
 #######################################################################################
 
 # OCR image type 1 
@@ -71,6 +72,9 @@ twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
 pages_number=1
+
+# Note that my csv file uses the American date format!
+myfile_date_format = '%m/%d/%Y'
 
 # Temporarily: Data range to display when running the script
 data_range=slice(40,45,None)
@@ -105,7 +109,29 @@ df_hqsr = df_hqsr.reindex(
 
 # Open error log file
 errlogfile = open(err_log_path + 'OCR_errors.log', 'a')
+# Open error correction file
+errcorrectfile_name=err_log_path + 'OCR_error_correction.csv'
+if not os.path.exists(errcorrectfile_name):
+    errcorrectfile = open(errcorrectfile_name, 'w')
+    print("\"Date\",\"Column\",\"is\",\"should be\"", file=errcorrectfile)
+else:
+    if os.path.getsize(errcorrectfile_name) > 0:
+        # Check for newline at EOF. If it is not there, add it.
+        errcorrectfile = open(errcorrectfile_name, 'r')
+        # Get file as string. This will also be needed later.
+        errcorrectfile_str = str(errcorrectfile.read())
+        last_chr = errcorrectfile_str[-1]
+        errcorrectfile.close()
+        errcorrectfile = open(errcorrectfile_name, 'a')
+        if not '\n' in last_chr:
+            # Add newline at EOF 
+            errcorrectfile.write('\n')
+    else:
+        errcorrectfile = open(errcorrectfile_name, 'a')
+        errcorrectfile_str=""
+        print("\"Date\",\"Column\",\"is\",\"should be\"", file=errcorrectfile)
 
+ERRFLAG=0
 # Download images that contain data
 # Find the numbers of tested in the images.
 # Write these numbers in the 'tested' column.
@@ -138,12 +164,25 @@ for index, row in df_hqsr.iterrows():
         # Insert the cumulative number of tested patients the 'tested' column of df_hqsr.
             df_hqsr.loc[index,label] = int(number_str)
         else:
+            ERRFLAG=1
             df_hqsr.loc[index,label] = number_str
             error_message_str = datetime.now().strftime("%Y.%m.%d %H:%M:%S")+ " OCR error! "+ label+ " : "+ number_str+ " is not a number in "+ img_file_name 
             print(error_message_str, file = errlogfile)
             print(error_message_str ,file = sys.stderr)
+            new_error=df_hqsr.loc[index,'time'].strftime(myfile_date_format)+","+label+ ","+ number_str+ ","
+            # Check if this error already exists in OCR error file (also if corrected)
+            if not new_error in errcorrectfile_str:
+                print(new_error,file = errcorrectfile)
+            else:
+                print("\tThis error already exists in the OCR error file "+errcorrectfile_name, file=sys.stderr)    
+
+if ERRFLAG:
+    print("\nIf not already corrected, correct these errors manually in " + err_log_path + "OCR_error_correction.csv",file = sys.stderr)
+    print("and run the error correction script run_error_correction.sh",file = sys.stderr)
+
 # Close error log file
 errlogfile.close()
+errcorrectfile.close()
 
 # For some reason, the numbers entered to columns are float...    
 # Convert the 'tested' column to int  
@@ -189,8 +228,7 @@ newest_twitter_index = 0
 # Newest date in df_hqsr, read as string
 newest_twitter_date_str = df_hqsr.loc[newest_twitter_index,'time']
 
-# Note that my csv file uses the American date format!
-myfile_date_format = '%m/%d/%Y'
+
 
 # Convert newest_twitter_date to myfile_date_format.
 # newest_twitter_date is the date corresponding to the last record of my Twitter data.
