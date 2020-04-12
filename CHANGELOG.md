@@ -12,7 +12,7 @@
 ## [1.0.2] - 2020-04-12
  
 ### Added
-   Semi-manual error correction.
+   Semi-manual error correction
 ### Changed
    Improved output display
 <!--### Fixed-->
