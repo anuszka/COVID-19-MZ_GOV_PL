@@ -13,5 +13,6 @@
  
 ### Added
    Semi-manual error correction.
-<!--### Changed-->
+### Changed
+   Improved output display
 <!--### Fixed-->
