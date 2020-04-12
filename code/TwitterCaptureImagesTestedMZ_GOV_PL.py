@@ -68,6 +68,10 @@ twitter_user = 'MZ_GOV_PL'
 # Number of Twitter pages to read
 pages_number=1
 
+# Temporarily: Data range to display when running the script
+data_range=slice(40,45,None)
+# Temporarily: Max column width to display when running the script
+max_column_width=20
 
 # Strings to find in tweets
 start = 'W ciągu doby wykonano'
@@ -155,8 +159,8 @@ myfile_df = pd.read_csv(old_csv_file_name)
 # Works in Jupyter notebook / IPython
 # Display more columns in Ipython
 pd.set_option('display.max_columns', 20)
-pd.set_option('display.max_colwidth', 10)
-display(myfile_df[30:45])
+pd.set_option('display.max_colwidth', max_column_width)
+display(myfile_df[data_range])
 
 
 # The newest row (0) in the tweets data frame df_tested
@@ -250,4 +254,4 @@ print("Update written to local data file:", new_csv_file_name)
 
 # Show part of the new csv file as a table (I need to improve this)
 # Works in Jupyter notebook / IPython
-display(myfile_df[30:45])
+display(myfile_df[data_range])
