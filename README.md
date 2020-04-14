@@ -23,7 +23,7 @@ To read numbers from bitmaps, I used Python packages for image recognition (to f
 
 Data in other columns were entered manually.
 
-**Caution!** Image recognition is not perfect. The images posted by the Ministry of Health are not quite easy to OCR. The numbers appear against the background of circles and underlines. Someone with more experience may try to deal with it using predefined patterns for digits because the font does not change on images. But I used only simple tools. As a result, OCR may fail sometimes. 
+**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0.) 
 + If non-digit characters show up in the data file entries, such entries need to be corrected manually. Notifications on OCR errors are saved to `./ocr_errors/OCR_errors.log` file so that the user would know what to correct.
 
 **Semi-manual OCR error correction**
