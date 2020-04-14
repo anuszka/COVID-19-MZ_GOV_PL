@@ -44,7 +44,7 @@ import matplotlib.dates as mdates
 import glob
 import sys 
 #######################################################################################
-exec(open('TwitterCaptureOther_functions.py').read())
+exec(open('../code/TwitterCaptureOther_functions.py').read())
 #######################################################################################
 
 # CSV data path
@@ -57,7 +57,7 @@ twitter_data_path = "../twitter_captured_data/"
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=3
+pages_number=1
 
 # Temporarily: Data range to display when running the script
 data_range=slice(40,45,None)

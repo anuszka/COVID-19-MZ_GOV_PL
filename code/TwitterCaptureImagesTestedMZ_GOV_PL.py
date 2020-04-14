@@ -47,10 +47,10 @@ import sys
 # OCR image type 2
 # ocr_t(path_filename_in_)
 # returns: tested
-exec(open('TwitterCaptureImages_functions.py').read())
+exec(open('../code/TwitterCaptureImages_functions.py').read())
 # import TwitterCaptureImages_functions # For some reason, this doesn't work in my Jupyter notebook...(?)
 #######################################################################################
-exec(open('TwitterCaptureOther_functions.py').read())
+exec(open('../code/TwitterCaptureOther_functions.py').read())
 #######################################################################################
 
 # CSV data path

@@ -52,7 +52,7 @@ import os
 exec(open('../code/TwitterCaptureImages_functions.py').read())
 # import TwitterCaptureImages_functions # For some reason, this doesn't work in my Jupyter notebook...(?)
 ############################################################################################################
-exec(open('TwitterCaptureOther_functions.py').read())
+exec(open('../code/TwitterCaptureOther_functions.py').read())
 #######################################################################################
 
 # CSV data path
