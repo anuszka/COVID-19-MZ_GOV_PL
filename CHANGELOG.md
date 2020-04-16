@@ -1,7 +1,12 @@
 
 
 # Change Log
+## [1.1.1] - 2020-04-17
 
+### Fixed
+  2020.04.16: [Change of image format](https://twitter.com/MZ_GOV_PL/status/1250748610276470784) on Polish Health Ministry's Twitter @MZ_GOV_PL
+   OCR: added new image format
+   
 ## [1.1.0] - 2020-04-15
  
 ### Added
