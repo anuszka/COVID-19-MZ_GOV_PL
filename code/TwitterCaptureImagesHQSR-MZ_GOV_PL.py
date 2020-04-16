@@ -71,13 +71,13 @@ err_log_path = "../ocr_errors/"
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=1
+pages_number=3
 
 # Note that my csv file uses the American date format!
 myfile_date_format = '%m/%d/%Y'
 
 # Temporarily: Data range to display when running the script
-data_range=slice(40,45,None)
+data_range=slice(44,50,None)
 # Temporarily: Max column width to display when running the script
 max_column_width=20
 
@@ -150,9 +150,15 @@ for index, row in df_hqsr.iterrows():
     open(img_file_name, 'wb').write(myfile.content)
     # OCR image to get the cumulative number of tested patients
     # number_list contains: hospitalized, quarantined, supervised, recovered
-    numbers = ocr_hqsr(img_file_name)
+    
+    d1=pd.to_datetime(row['time'])
+    d2=datetime(2020,4,16,9,0,34) # change of image format on this date
+    print(d1, d2)
+    if(d1>=d2): 
+        numbers = ocr_hqsr(img_file_name)
+    else:
+        numbers = ocr_hqsr_old(img_file_name) # for old image format
     labels=['hospitalized', 'quarantined', 'supervised', 'recovered']
-
     # Create a dictionary from two lists
     labels_numbers = {labels[i]: numbers[i] for i in range(len(labels))} 
     
@@ -222,11 +228,9 @@ pd.set_option('display.max_colwidth', max_column_width)
 display(myfile_df[data_range])
 
 
-# The newest row (0) in the tweets data frame df_hqsr
-newest_twitter_index = 0
-
+# The newest row index is 0 in the tweets data frame df_confirmed_deaths
 # Newest date in df_hqsr, read as string
-newest_twitter_date_str = df_hqsr.loc[newest_twitter_index,'time']
+newest_twitter_date_str = df_hqsr.loc[0,'time']
 
 
 
@@ -261,32 +265,19 @@ twitter_increment_index=0
 last_twitter_index = df_hqsr.tail(1).index.item()
 
 # Loop from the 0-th to last row in the Twitter data:
-# print("before loop")
-# print("twitter_increment_index, last_twitter_index", twitter_increment_index, last_twitter_index)
-# Strange bug: This loop works only if there are more than 2 images downloaded...
 # For some reason it does not update under the last index
 while twitter_increment_index<=last_twitter_index:
-#     print("in loop")
-    # Get the dates for the new rows
     # Note the difference in time ordering of my csv file data and the Twitter data:
     # newest_myfile_index-myfile_increment_index : we move up my csv file
-    # newest_twitter_index+twitter_increment_index : we move down the Twitter data
-    myfile_date = \
-        pd.to_datetime(myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Data']).\
-        strftime(myfile_date_format)
-    twitter_date = df_hqsr.loc[newest_twitter_index+twitter_increment_index,'time'].\
-        strftime(myfile_date_format)
-    #print(myfile_date, twitter_date)
-    # This will be OK at the 0-th increment 
-    # because newest_myfile_index and newest_twitter_index have already been found.
+    # 0+twitter_increment_index : we move down the Twitter data
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Hospitalizowani'] =\
-      df_hqsr.loc[newest_twitter_index+twitter_increment_index,'hospitalized']
+      df_hqsr.loc[twitter_increment_index,'hospitalized']
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Kwarantanna'] =\
-      df_hqsr.loc[newest_twitter_index+twitter_increment_index,'quarantined']
+      df_hqsr.loc[twitter_increment_index,'quarantined']
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Nadzór'] =\
-      df_hqsr.loc[newest_twitter_index+twitter_increment_index,'supervised']
+      df_hqsr.loc[twitter_increment_index,'supervised']
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wyzdrowiali'] =\
-      df_hqsr.loc[newest_twitter_index+twitter_increment_index,'recovered']
+      df_hqsr.loc[twitter_increment_index,'recovered']
 # Zmienić to na pętlę po słowniku
      
     # Go to the previous day in my csv file: move by one row (each row is one day in that file)
@@ -296,17 +287,6 @@ while twitter_increment_index<=last_twitter_index:
     twitter_increment_index = twitter_increment_index + 1
     
 
-
-    
-#     # There may be more entries for one day in Twitter data.
-#     # If the  current dates in my file data and Twitter data don't match, 
-#     # go one row further in Twitter data and check again.
-#     while twitter_date != myfile_date:
-#         twitter_increment_index = twitter_increment_index + 1
-#         twitter_date = df_hqsr.loc[newest_twitter_index+twitter_increment_index,'time']\
-#            .strftime(myfile_date_format)   
-#     #print(myfile_date, twitter_date)
-      
 
 print_message("Captured images written to local directory:", imgpath)
 

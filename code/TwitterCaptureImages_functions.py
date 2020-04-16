@@ -92,12 +92,116 @@ def threshold(img, thr):
 def invert(img):
     img[:]= -img[:]+255
     return img
+#######################################################################################
+def do_ocr(img, custom_config):
+    output_str = pytesseract.image_to_string(img, config=custom_config)
+    # Remove spaces
+    output_str=output_str.replace(" ", "")
+    return output_str
 
 
 #######################################################################################
-# OCR image type 1 
+# OCR image type 1
 # returns: hospitalized, quarantined, supervised, recovered
 def ocr_hqsr(path_filename_in_, show_preview=False):
+    # I can import packages inside a function, they are cached and are not re-imported unnecessarily.
+    
+    # Read image
+    img = cv2.imread(path_filename_in_)
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(img)
+    ###########################
+    
+    s1 = imgcut(img, ratio=0.57, keep='bottom')
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(s1, 's1')
+    ###########################
+
+    s2= imgcut(s1, ratio=0.3, keep='top')
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(s2, 's2')
+    ###########################
+    
+    # Take green channel to get rid of the red lines in the background
+    B, G, R = cv2.split(s2) 
+
+    ###########################
+    # Preview window
+    if show_preview: preview(G)
+    ###########################
+
+    # Apply threshold to the image
+    mythreshold = 200 # custom threshold, adjusted for this particular image type
+    G1 = threshold(G, mythreshold)
+    ###########################
+    # Preview window
+    if show_preview: preview(G1, window_title="Threshold")
+    ###########################
+    # Invert image
+    G2 = G1 #invert(G1)
+    
+#     ###########################
+#     # Preview window
+#     if show_preview: preview(G2, window_title="No invert")
+#     ###########################
+    
+    left_half = imgcut(G2, ratio=0.5, keep='left')
+    right_half = imgcut(G2, ratio=0.5, keep='right')
+    h=imgcut(left_half, ratio=0.5, keep='left')
+    q=imgcut(left_half, ratio=0.5, keep='right')
+    s=imgcut(right_half, ratio=0.5, keep='left')
+    r=imgcut(right_half, ratio=0.5, keep='right')
+    
+    ###########################
+    # Preview window
+    if show_preview: 
+        preview(h, window_title="h")
+        preview(q, window_title="q")
+        preview(s, window_title="s")
+        preview(r, window_title="r")
+    ###########################
+    
+    
+    # Tesseract configuration
+    custom_config = r'--oem 3 --psm 6 -l eng tessedit_char_whitelist=0123456789'
+    # OCR the green channel image
+    hospitalizowani = do_ocr(h, custom_config)
+    kwarantanna= do_ocr(q, custom_config)
+    nadzór= do_ocr(s, custom_config) 
+    wyzdrowiali= do_ocr(r, custom_config)
+    # Można to napisać bardziej po pythonowemu w jakiejś pętli
+    
+    
+
+
+#         # repr() : raw string 
+# #     print(repr(output_str))
+    
+#     # Split the string into a list by the dividers: '\n'
+#     output_list=output_str.split('\n')
+    
+#     # Remove empty elements
+#     output_list = [i for i in output_list if i] 
+    
+#     # Convert to int
+#     hospitalizowani, kwarantanna, nadzór, wyzdrowiali = output_list #[int(i) for i in output_list]  
+    
+    # Needed to correctly close preview windows, if used
+    cv2.destroyAllWindows()
+    
+    print(hospitalizowani, kwarantanna, nadzór, wyzdrowiali)
+    return hospitalizowani, kwarantanna, nadzór, wyzdrowiali
+
+#######################################################################################
+# OCR image type 1 (old)
+# returns: hospitalized, quarantined, supervised, recovered
+def ocr_hqsr_old(path_filename_in_, show_preview=False):
     # I can import packages inside a function, they are cached and are not re-imported unnecessarily.
     
     # Read image
@@ -144,13 +248,16 @@ def ocr_hqsr(path_filename_in_, show_preview=False):
     # Apply threshold to the image
     mythreshold = 200 # custom threshold, adjusted for this particular image type
     G1 = threshold(G, mythreshold)
-    
+    ###########################
+    # Preview window
+    if show_preview: preview(G1, window_title="Threshold")
+    ###########################
     # Invert image
     G2 = invert(G1)
     
     ###########################
     # Preview window
-    if show_preview: preview(G2)
+    if show_preview: preview(G2, window_title="No invert")
     ###########################
    
     
@@ -158,10 +265,8 @@ def ocr_hqsr(path_filename_in_, show_preview=False):
     custom_config = r'--oem 3 --psm 6 -l eng tessedit_char_whitelist=0123456789'
     # OCR the green channel image
     output_str = pytesseract.image_to_string(G2, config=custom_config)
-    
     # Remove spaces
     output_str=output_str.replace(" ", "")
-
     # repr() : raw string 
 #     print(repr(output_str))
     
@@ -177,7 +282,6 @@ def ocr_hqsr(path_filename_in_, show_preview=False):
     # Needed to correctly close preview windows, if used
     cv2.destroyAllWindows()
     
-    # print(hospitalizowani, kwarantanna, nadzór, wyzdrow iali)
     return hospitalizowani, kwarantanna, nadzór, wyzdrowiali
 
 #############################################################################################
@@ -231,14 +335,18 @@ def ocr_t(path_filename_in_, show_preview=False):
     # Apply threshold to the image
     mythreshold = 200 # custom threshold, adjusted for this particular image type
     G1 = threshold(G, mythreshold)
+    ###########################
+    # Preview window
+    if show_preview: preview(G1, "Threshold")
+    ###########################
 
     
     
     # Invert image
-    G2=invert(G1)
+    G2=G1 #invert(G1)
     ###########################
     # Preview window
-    if show_preview: preview(G2)
+    if show_preview: preview(G2, "No invert")
     ###########################
 
     

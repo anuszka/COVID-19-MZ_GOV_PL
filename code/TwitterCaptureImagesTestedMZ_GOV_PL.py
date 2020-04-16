@@ -66,10 +66,10 @@ twitter_data_path = "../twitter_captured_data/"
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=1
+pages_number=2
 
 # Temporarily: Data range to display when running the script
-data_range=slice(40,45,None)
+data_range=slice(44,50,None)
 # Temporarily: Max column width to display when running the script
 max_column_width=20
 
@@ -163,11 +163,9 @@ pd.set_option('display.max_colwidth', max_column_width)
 display(myfile_df[data_range])
 
 
-# The newest row (0) in the tweets data frame df_tested
-newest_twitter_index = 0
-
+# The newest row index is 0 in the tweets data frame df_confirmed_deaths
 # Newest date in df_tested, read as string
-newest_twitter_date_str = df_tested.loc[newest_twitter_index,'time']
+newest_twitter_date_str = df_tested.loc[0,'time']
 
 # Note that my csv file uses the American date format!
 myfile_date_format = '%m/%d/%Y'
@@ -206,38 +204,15 @@ last_twitter_index = df_tested.tail(1).index.item()
 # print("before loop")
 # print("twitter_increment_index, last_twitter_index", twitter_increment_index, last_twitter_index)
 # Strange bug: This loop works only if there are more than 2 images downloaded...
-while twitter_increment_index<last_twitter_index:
-#     print("in loop")
-    # This will be OK at the 0-th increment 
-    # because newest_myfile_index and newest_twitter_index have already been found.
+while twitter_increment_index<=last_twitter_index:
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Testy'] =\
-      df_tested.loc[newest_twitter_index+twitter_increment_index,'tested']
-      
+    df_tested.loc[twitter_increment_index,'tested']
     # Go to the previous day in my csv file: move by one row (each row is one day in that file)
     myfile_increment_index = myfile_increment_index + 1
-    
-    # Try to go to the previous day in Twitter data: move by one row
+    # Go to the previous day in my csv file: move by one row (each row is one day in that file)
     twitter_increment_index = twitter_increment_index + 1
     
-    # Get the dates for the new rows
-    # Note the difference in time ordering of my csv file data and the Twitter data:
-    # newest_myfile_index-myfile_increment_index : we move up my csv file
-    # newest_twitter_index+twitter_increment_index : we move down the Twitter data
-    myfile_date = \
-        pd.to_datetime(myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Data']).\
-        strftime(myfile_date_format)
-    twitter_date = df_tested.loc[newest_twitter_index+twitter_increment_index,'time'].\
-        strftime(myfile_date_format)
-#     print(myfile_date, twitter_date)
-    
-#     # There may be more entries for one day in Twitter data.
-#     # If the  current dates in my file data and Twitter data don't match, 
-#     # go one row further in Twitter data and check again.
-#     while twitter_date != myfile_date:
-#         twitter_increment_index = twitter_increment_index + 1
-#         twitter_date = df_tested.loc[newest_twitter_index+twitter_increment_index,'time']\
-#            .strftime(myfile_date_format)   
-#     #print(myfile_date, twitter_date)
+
 
    
 print_message("Captured images written to local directory:", imgpath)

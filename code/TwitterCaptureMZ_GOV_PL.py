@@ -57,10 +57,10 @@ twitter_data_path = "../twitter_captured_data/"
 twitter_user = 'MZ_GOV_PL'
 
 # Number of Twitter pages to read
-pages_number=1
+pages_number=2
 
 # Temporarily: Data range to display when running the script
-data_range=slice(40,45,None)
+data_range=slice(44,50,None)
 # Temporarily: Max column width to display when running the script
 max_column_width=20
 
@@ -171,11 +171,9 @@ pd.set_option('display.max_colwidth', max_column_width)
 display(myfile_df[data_range])
 
 
-# The newest row (0) in the tweets data frame df_confirmed_deaths
-newest_twitter_index = 0
-
+# The newest row index is 0 in the tweets data frame df_confirmed_deaths
 # Newest date in df_confirmed_deaths, read as string
-newest_twitter_date_str = df_confirmed_deaths.loc[newest_twitter_index,'time']
+newest_twitter_date_str = df_confirmed_deaths.loc[0,'time']
 
 # Note that my csv file uses the American date format!
 myfile_date_format = '%m/%d/%Y'
@@ -209,37 +207,49 @@ twitter_increment_index=0
 last_twitter_index = df_confirmed_deaths.tail(1).index.item()
 
 # Loop from the 0-th to last row in the Twitter data:
-while twitter_increment_index<last_twitter_index-1:
+while twitter_increment_index<=last_twitter_index:
     # Get the dates for the new rows
     # Note the difference in time ordering of my csv file data and the Twitter data:
     # newest_myfile_index-myfile_increment_index : we move up my csv file
-    # newest_twitter_index+twitter_increment_index : we move down the Twitter data
-    myfile_date = \
-        pd.to_datetime(myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Data']).\
-        strftime(myfile_date_format)
-    twitter_date = df_confirmed_deaths.loc[newest_twitter_index+twitter_increment_index,'time'].\
-        strftime(myfile_date_format)
+    # 0+twitter_increment_index : we move down the Twitter data
 
     # There may be more entries for one day in Twitter data.
     # If the  current dates in my file data and Twitter data don't match, 
     # go one row further in Twitter data and check again.
-    while twitter_date != myfile_date:
+    # Here we check:
+    # If the date under twitter_increment_index is still the same (data from the morning),
+    # then we move on by one more row in Twitter data (to yesterday evening)
+    myfile_date = \
+        pd.to_datetime(myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Data']).\
+        strftime(myfile_date_format)
+    twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time'].\
+        strftime(myfile_date_format)
+    
+    print(twitter_increment_index)
+    if twitter_increment_index+1<=last_twitter_index:
+        while twitter_date != myfile_date:
+            print("Dates don't match.")
+            twitter_increment_index = twitter_increment_index + 1
+            print("new twitter_increment_index: ", twitter_increment_index)
+            twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time']\
+               .strftime(myfile_date_format) 
+        print("Dates match.")
+        myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
+          df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
+        myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
+          df_confirmed_deaths.loc[twitter_increment_index,'deaths']
+        # Go to the previous day in my csv file: move by one row (each row is one day in that file)
+        myfile_increment_index = myfile_increment_index + 1
+    else: 
+        if twitter_date == myfile_date:
+            print("Dates match.")
+            myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
+              df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
+            myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
+              df_confirmed_deaths.loc[twitter_increment_index,'deaths']
         twitter_increment_index = twitter_increment_index + 1
-        twitter_date = df_confirmed_deaths.loc[newest_twitter_index+twitter_increment_index,'time']\
-           .strftime(myfile_date_format)   
-    #print(myfile_date, twitter_date)
-    # This will be OK at the 0-th increment 
-    # because newest_myfile_index and newest_twitter_index have already been found.
-    myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
-      df_confirmed_deaths.loc[newest_twitter_index+twitter_increment_index,'confirmed']
-    myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
-      df_confirmed_deaths.loc[newest_twitter_index+twitter_increment_index,'deaths']
 
-    # Go to the previous day in my csv file: move by one row (each row is one day in that file)
-    myfile_increment_index = myfile_increment_index + 1
 
-    # Try to go to the previous day in Twitter data: move by one row
-    twitter_increment_index = twitter_increment_index + 1
 
 print_message("Captured data written to local data file:", captured_data_file_name)
 
