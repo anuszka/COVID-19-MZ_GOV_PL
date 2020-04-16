@@ -23,7 +23,8 @@ To read numbers from bitmaps, I used Python packages for image recognition (to f
 
 Data in other columns were entered manually.
 
-**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0.) 
+**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0.) **[2020.04.16: Image format has changed on Polish Health Ministry's Twitter [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL). I need to change the code accordingly.]**
+
 + If non-digit characters show up in the data file entries, such entries need to be corrected manually. Notifications on OCR errors are saved to `./ocr_errors/OCR_errors.log` file so that the user would know what to correct.
 
 **Semi-manual OCR error correction**
