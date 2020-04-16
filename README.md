@@ -15,7 +15,8 @@ On <a href="https://twitter.com/MZ_GOV_PL">their Twitter account</a>, the Minist
 
 * The number of confirmed cases (cumulative) and the number of deaths (cumulative) - in text form, as numbers in tweets.
 * The number of tests performed (cumulative) - as a bitmap image(!)
-* Hospitalized (for the current day), quarantined (for the current day), under surveillance (for the current day), recovered (cumulative) - as another bitmap image(!)
+* Hospitalized (for the current day), quarantined (for the current day), under surveillance (for the current day), recovered (cumulative) - as another bitmap image(!) which changes its format(!)
+
 
 I automated downloading these data from Twitter using scripts in Python.
 
@@ -23,7 +24,7 @@ To read numbers from bitmaps, I used Python packages for image recognition (to f
 
 Data in other columns were entered manually.
 
-**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0.) **[2020.04.16: Image format has changed on Polish Health Ministry's Twitter [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL). I need to change the code accordingly.]**
+**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0 and I fix it when image format changes.) 
 
 + If non-digit characters show up in the data file entries, such entries need to be corrected manually. Notifications on OCR errors are saved to `./ocr_errors/OCR_errors.log` file so that the user would know what to correct.
 
