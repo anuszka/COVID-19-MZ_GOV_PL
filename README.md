@@ -3,7 +3,7 @@ COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter [
 
 My plots of these data are here: http://soft.ichf.edu.pl/ochab/coronavirus_poland/
 
-For example, [my comments on the statistics for 2020.04.13 (in Polish)](http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.13/koronawirus_statystyki.2020.04.13.html).
+For example, [my comments on the statistics for 2020.04.17 (in Polish)](http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.17/koronawirus_statystyki.2020.04.17.html).
 
 ## Why from Twitter
 
@@ -85,12 +85,13 @@ Here, column headers as a dictionary (perhaps this will be useful for copy-pasti
 #### Restrictions introduced by Polish government
 For convenience of users, below I explain the cells content in `"Wydarzenia"` ("events") column: 
 
-| Polish | English | Comment |
-|--------|---------|---------|
+| Polish | English | 
+|--------|---------|
 |"Zamknięcie szkół i instytucji kulturalnych"| "Closing schools and cultural institutions|
 |"Ogłoszenie stanu epidemii"|"State of epidemic announced"|
 |"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
 |"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.)"|
+|"Dalsze restrykcje (zasłanianie twarzy)"| "Further restrictions (face covering)"|
 
 Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
@@ -103,4 +104,5 @@ Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary
 "Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" : \
   "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least \
   2 m in public, closing of hairdressing salons, etc.)"
+"Dalsze restrykcje (zasłanianie twarzy)" : "Further restrictions (face covering)"  
 ```
