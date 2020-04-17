@@ -2,6 +2,11 @@
 
 # Change Log
 
+## [1.1.3] - 2020-04-17
+### Fixed
+   Bug fix
+   Slightly corrected display
+   
 ## [1.1.2] - 2020-04-17
 ### Changed
    Corrected image filter threshold
