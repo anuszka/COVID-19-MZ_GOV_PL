@@ -221,7 +221,7 @@ print_message("Captured data written to local data file:", captured_data_file_na
 # Show the captured data
 # Works in Jupyter notebook / IPython        
 display(df_tested_to_export)
-
+print_spacer()
 
 # Export the updated file to CSV
 myfile_df.to_csv(new_csv_file_name, index=False)

@@ -171,6 +171,13 @@ pd.set_option('display.max_colwidth', max_column_width)
 display(myfile_df[data_range])
 
 
+print_message("Captured data written to local data file:", captured_data_file_name)
+
+# Show the captured data
+# Works in Jupyter notebook / IPython
+display(df_confirmed_deaths_to_export)
+
+
 # The newest row index is 0 in the tweets data frame df_confirmed_deaths
 # Newest date in df_confirmed_deaths, read as string
 newest_twitter_date_str = df_confirmed_deaths.loc[0,'time']
@@ -208,6 +215,7 @@ last_twitter_index = df_confirmed_deaths.tail(1).index.item()
 
 # Loop from the 0-th to last row in the Twitter data:
 while twitter_increment_index<=last_twitter_index:
+    
     # Get the dates for the new rows
     # Note the difference in time ordering of my csv file data and the Twitter data:
     # newest_myfile_index-myfile_increment_index : we move up my csv file
@@ -227,20 +235,26 @@ while twitter_increment_index<=last_twitter_index:
     
     
     if twitter_increment_index+1<=last_twitter_index:
+       
         while twitter_date != myfile_date:
          
             twitter_increment_index = twitter_increment_index + 1
             
-            twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time']\
-               .strftime(myfile_date_format) 
+            if twitter_increment_index<=last_twitter_index:
+                twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time']\
+               .strftime(myfile_date_format)
+            else:
+                break
         
-        myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
-          df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
-        myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
-          df_confirmed_deaths.loc[twitter_increment_index,'deaths']
+        if twitter_increment_index<=last_twitter_index:
+            myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
+              df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
+            myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
+              df_confirmed_deaths.loc[twitter_increment_index,'deaths']
         # Go to the previous day in my csv file: move by one row (each row is one day in that file)
         myfile_increment_index = myfile_increment_index + 1
     else: 
+        
         if twitter_date == myfile_date:
             
             myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
@@ -249,13 +263,6 @@ while twitter_increment_index<=last_twitter_index:
               df_confirmed_deaths.loc[twitter_increment_index,'deaths']
         twitter_increment_index = twitter_increment_index + 1
 
-
-
-print_message("Captured data written to local data file:", captured_data_file_name)
-
-# Show the captured data
-# Works in Jupyter notebook / IPython
-display(df_confirmed_deaths_to_export)
 
 
 # Export the updated file to CSV
