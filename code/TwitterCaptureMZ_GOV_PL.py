@@ -225,15 +225,15 @@ while twitter_increment_index<=last_twitter_index:
     twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time'].\
         strftime(myfile_date_format)
     
-    print(twitter_increment_index)
+    
     if twitter_increment_index+1<=last_twitter_index:
         while twitter_date != myfile_date:
-            print("Dates don't match.")
+         
             twitter_increment_index = twitter_increment_index + 1
-            print("new twitter_increment_index: ", twitter_increment_index)
+            
             twitter_date = df_confirmed_deaths.loc[twitter_increment_index,'time']\
                .strftime(myfile_date_format) 
-        print("Dates match.")
+        
         myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
           df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
         myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\
@@ -242,7 +242,7 @@ while twitter_increment_index<=last_twitter_index:
         myfile_increment_index = myfile_increment_index + 1
     else: 
         if twitter_date == myfile_date:
-            print("Dates match.")
+            
             myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Wykryci zakażeni'] =\
               df_confirmed_deaths.loc[twitter_increment_index,'confirmed']
             myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Zmarli'] =\

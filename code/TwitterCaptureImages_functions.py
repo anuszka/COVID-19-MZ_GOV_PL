@@ -137,7 +137,7 @@ def ocr_hqsr(path_filename_in_, show_preview=False):
     ###########################
 
     # Apply threshold to the image
-    mythreshold = 200 # custom threshold, adjusted for this particular image type
+    mythreshold = 170 # custom threshold, adjusted for this particular image type
     G1 = threshold(G, mythreshold)
     ###########################
     # Preview window
@@ -195,7 +195,6 @@ def ocr_hqsr(path_filename_in_, show_preview=False):
     # Needed to correctly close preview windows, if used
     cv2.destroyAllWindows()
     
-    print(hospitalizowani, kwarantanna, nadzór, wyzdrowiali)
     return hospitalizowani, kwarantanna, nadzór, wyzdrowiali
 
 #######################################################################################

@@ -153,7 +153,6 @@ for index, row in df_hqsr.iterrows():
     
     d1=pd.to_datetime(row['time'])
     d2=datetime(2020,4,16,9,0,34) # change of image format on this date
-    print(d1, d2)
     if(d1>=d2): 
         numbers = ocr_hqsr(img_file_name)
     else:
@@ -165,7 +164,7 @@ for index, row in df_hqsr.iterrows():
     for label in labels_numbers:
         # print(label, labels_numbers[label])
         number_str = labels_numbers[label]
-        is_number = all(map(str.isdigit, number_str))
+        is_number = number_str.isnumeric() #all(map(str.isdigit, number_str))
         if(is_number):
         # Insert the cumulative number of tested patients the 'tested' column of df_hqsr.
             df_hqsr.loc[index,label] = int(number_str)
