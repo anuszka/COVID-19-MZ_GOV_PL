@@ -69,7 +69,7 @@ twitter_user = 'MZ_GOV_PL'
 pages_number=2
 
 # Temporarily: Data range to display when running the script
-data_range=slice(44,50,None)
+data_range=slice(49,60,None)
 # Temporarily: Max column width to display when running the script
 max_column_width=20
 
