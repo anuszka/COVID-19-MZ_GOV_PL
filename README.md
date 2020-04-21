@@ -3,7 +3,7 @@ COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter [
 
 My plots of these data are here: http://soft.ichf.edu.pl/ochab/coronavirus_poland/
 
-For example, [my comments on the statistics for 2020.04.17 (in Polish)](http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.17/koronawirus_statystyki.2020.04.17.html).
+For example, [my comments on the statistics for 2020.04.20 (in Polish)](http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.20.a/koronawirus_statystyki.2020.04.20.a.html).
 
 ## Why from Twitter
 
