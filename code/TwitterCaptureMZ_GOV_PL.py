@@ -115,15 +115,16 @@ for index, row in df_confirmed_deaths.iterrows():
     # N=1 : result 1
     # N=2 : result 2
     confirmed_str, deaths_str = result.group(1), result.group(2)
-
+    # Remove spaces
+    confirmed_str=confirmed_str.replace(" ","")
+    deaths_str=deaths_str.replace(" ","")
     # Sanitize the result strings: filter only numbers 
     confirmed_sanitized = re.search("([0-9]+)",confirmed_str).group(1)
     deaths_sanitized = re.search("([0-9]+)",deaths_str).group(1)
-
+    
     # Convert strings to integer numbers
     confirmed = int(confirmed_sanitized)
     deaths = int(deaths_sanitized)
-
     # I must check how to deal with data frame copies. Sometimes a warning shows up...?
     # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
     # For now:
