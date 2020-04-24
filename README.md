@@ -24,7 +24,7 @@ To read the numbers from bitmaps, I used Python packages for image recognition (
 
 Data in other columns were entered manually.
 
-**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0 and I fix it when image format changes.) Go to  [OCRerrorsREADME.md](https://github.com/anuszka/COVID-19-MZ_GOV_PL/blob/master/OCRerrorsREADME.md) to see what errors may occur and howe to correct them.
+**Caution!** Image recognition is not perfect. (However, I greatly improved it in v. 1.1.0 and I fix it when image format changes.) Go to  [OCRerrorsREADME.md](https://github.com/anuszka/COVID-19-MZ_GOV_PL/blob/master/OCRerrorsREADME.md) to see what errors may occur and how to correct them.
   
 
 ## Data
