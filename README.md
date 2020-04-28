@@ -53,6 +53,7 @@ For convenience of users, below I explain the column headers:
 | "Kwarantanna po powrocie do kraju" | "quarantined after return to Poland"| for a given day, not cumulative| 
 | "Wydarzenia" | "events"| restrictions introduced by Polish government (described in Polish)| 
 | "Wyzdrowiali" |  "recovered"|  cumulative| 
+| "Testowane osoby" | "persons tested" | cumulative |
 
 Here, column headers as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 
@@ -74,6 +75,7 @@ Here, column headers as a dictionary (perhaps this will be useful for copy-pasti
                                                                            # not cumulative
 "Wydarzenia" : "events",  # restrictions introduced by Polish government (described in Polish)
 "Wyzdrowiali" : "recovered" # cumulative
+"Testowane osoby" : "persons tested"  # cumulative
 ```
 #### Restrictions introduced by Polish government
 For convenience of users, below I explain the cells content in `"Wydarzenia"` ("events") column: 
@@ -99,6 +101,10 @@ Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary
   2 m in public, closing of hairdressing salons, etc.)"
 "Dalsze restrykcje (zasłanianie twarzy)" : "Further restrictions (face covering)"  
 ```
+### 2020-04-28: New data 
+Additional data are now shown on [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL) Twitter: Number of persons tested.
+
+New column added in CSV data file: 'Testowane osoby' ('Persons tested').
 
 ### 2020-04-20: Data corrected!
 
