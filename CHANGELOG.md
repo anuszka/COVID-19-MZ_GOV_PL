@@ -4,7 +4,8 @@
 
 ## 2020-04-28
 ### New data 
-Additional data are shown on @MZ_GOV_PL Twitter: Number of persons tested.
+Additional data are shown on [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL) Twitter: Number of persons tested.
+
 New column added in CSV data file: 'Testowane osoby' ('Persons tested').
 
 ## [1.1.4] - 2020-04-22
