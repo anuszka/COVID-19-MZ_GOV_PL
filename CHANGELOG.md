@@ -2,9 +2,15 @@
 
 # Change Log
 
+## 2020-04-28
+### New data 
+Additional data are now shown on [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL) Twitter: Number of persons tested.
+
+New column added in CSV data file: 'Testowane osoby' ('Persons tested').
+
 ## [1.1.4] - 2020-04-22
 ### Fixed
-   Added whitespace removal when sanitizing the Twitter input data in TwitterCaptureMZ_GOV_PL.py
+Added whitespace removal when sanitizing the Twitter input data in TwitterCaptureMZ_GOV_PL.py
 
 ## 2020-04-20
 ### Data corrected
