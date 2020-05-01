@@ -119,15 +119,21 @@ for index, row in df_tested.iterrows():
     img_file_name = imgpath+"TCImageTestedMZ_GOV_PL."+timestamp+".jpg"
     open(img_file_name, 'wb').write(myfile.content)
     # OCR image to get the cumulative number of tested patients
-    tested, persons_tested = ocr_t(img_file_name)
+    
+    d1=pd.to_datetime(row['time'])
+    d2=datetime(2020,4,28,0,0,0) # change of image format on this date
+    if(d1>=d2): 
+        tested, persons_tested = ocr_t(img_file_name)
+    else:
+        tested, persons_tested = ocr_t_old(img_file_name), np.NaN # for old image format
+    
     # Insert the cumulative number of tested patients the 'tested' column of df_tested.
     df_tested.loc[index,'tested'] = tested
     df_tested.loc[index,'persons tested'] = persons_tested
-    ###### Include old version: ocr_t_old for older images!!! #################################
 
-# For some reason, the numbers entered to columns are float...    
-# Convert the 'tested' column to int  
-df_tested = df_tested.astype({'tested': int, 'persons tested': int})
+# Convert the 'tested' column to int
+df_tested = df_tested.astype({'tested': 'Int64', 'persons tested': 'Int64'})
+
 
 # Reset index (because old indexes were inherited from df) 
 df_tested = df_tested.reset_index(drop=True)
@@ -141,7 +147,7 @@ today_str = today.strftime("%Y.%m.%d")
 captured_data_file_name = twitter_data_path+"TCTestedMZ_GOV_PL."+today_str+".csv"
 
 df_tested_to_export.to_csv (captured_data_file_name, index = False, header=True)
-
+# For some reason, the numbers entered to columns are float... This is probably to keep NaNs...
 
 
 # Update the existing CSV data file

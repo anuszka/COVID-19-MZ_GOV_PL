@@ -2,7 +2,13 @@
 
 # Change Log
 
-## [1.1.5] -2020-05-01
+## [1.2.0] - 2020-05-01
+2020.04.28: [Change of image format](https://twitter.com/MZ_GOV_PL/status/1255097510907072512) on Polish Health Ministry's Twitter @MZ_GOV_PL - number of tested persons added
+
+### Fixed
+   OCR function for capture of the numbers of tests and tested persons now uses the new format for new images and the old format for old images
+
+## [1.1.5] - 2020-05-01
 2020.04.28: [Change of image format](https://twitter.com/MZ_GOV_PL/status/1255097510907072512) on Polish Health Ministry's Twitter @MZ_GOV_PL - number of tested persons added
 
 ### Added

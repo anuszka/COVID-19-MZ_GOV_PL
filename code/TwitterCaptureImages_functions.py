@@ -287,7 +287,7 @@ def ocr_hqsr_old(path_filename_in_, show_preview=False):
 #
 # OCR image type 2 (old)
 # returns: tested
-def ocr_t_old(path_filename_in_, show_preview=True):
+def ocr_t_old(path_filename_in_, show_preview=False):
     # I can import packages inside a function, they are cached and are not re-imported unnecessarily.
     # Read image
     img = cv2.imread(path_filename_in_)
