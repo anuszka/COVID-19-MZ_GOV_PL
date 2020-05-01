@@ -4,10 +4,12 @@
 
 ## [1.1.5] -2020-05-01
 2020.04.28: [Change of image format](https://twitter.com/MZ_GOV_PL/status/1255097510907072512) on Polish Health Ministry's Twitter @MZ_GOV_PL - number of tested persons added
-### Fixed
-   Slightly corrected display
+
 ### Added
    OCR: Capture of the number of tested persons added
+
+### Fixed
+   Slightly corrected display
 
 ## 2020-04-28
 ### New data 
