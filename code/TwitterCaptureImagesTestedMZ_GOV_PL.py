@@ -69,7 +69,7 @@ twitter_user = 'MZ_GOV_PL'
 pages_number=2
 
 # Temporarily: Data range to display when running the script
-data_range=slice(49,60,None)
+data_range=slice(55,65,None)
 # Temporarily: Max column width to display when running the script
 max_column_width=20
 
@@ -99,6 +99,8 @@ df_tested=df[df['text'].str.contains(start, na=False)]
 # Add a new column to the twitter data frame: 'tested' 
 df_tested = df_tested.reindex(
     df_tested.columns.tolist() + ['tested'], axis=1) 
+df_tested = df_tested.reindex(
+    df_tested.columns.tolist() + ['persons tested'], axis=1)
 
 # Download images that contain data
 # Find the numbers of tested in the images.
@@ -117,21 +119,22 @@ for index, row in df_tested.iterrows():
     img_file_name = imgpath+"TCImageTestedMZ_GOV_PL."+timestamp+".jpg"
     open(img_file_name, 'wb').write(myfile.content)
     # OCR image to get the cumulative number of tested patients
-    tested = ocr_t(img_file_name)
+    tested, persons_tested = ocr_t(img_file_name)
     # Insert the cumulative number of tested patients the 'tested' column of df_tested.
     df_tested.loc[index,'tested'] = tested
-
+    df_tested.loc[index,'persons tested'] = persons_tested
+    ###### Include old version: ocr_t_old for older images!!! #################################
 
 # For some reason, the numbers entered to columns are float...    
 # Convert the 'tested' column to int  
-df_tested = df_tested.astype({'tested': int})
+df_tested = df_tested.astype({'tested': int, 'persons tested': int})
 
 # Reset index (because old indexes were inherited from df) 
 df_tested = df_tested.reset_index(drop=True)
 
 # For check, write the downloaded data to a file: 
 # data_file_name = path+"TCImageTestedMZ_GOV_PL."+today_str+".csv"
-df_tested_to_export = df_tested[['time', 'tested']]
+df_tested_to_export = df_tested[['time', 'tested', 'persons tested']]
 today = date.today()
 today_str = today.strftime("%Y.%m.%d")
 
@@ -207,6 +210,8 @@ last_twitter_index = df_tested.tail(1).index.item()
 while twitter_increment_index<=last_twitter_index:
     myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Testy'] =\
     df_tested.loc[twitter_increment_index,'tested']
+    myfile_df.loc[newest_myfile_index-myfile_increment_index, 'Testowane osoby'] =\
+    df_tested.loc[twitter_increment_index,'persons tested']
     # Go to the previous day in my csv file: move by one row (each row is one day in that file)
     myfile_increment_index = myfile_increment_index + 1
     # Go to the previous day in my csv file: move by one row (each row is one day in that file)

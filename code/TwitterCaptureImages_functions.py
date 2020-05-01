@@ -285,9 +285,9 @@ def ocr_hqsr_old(path_filename_in_, show_preview=False):
 
 #############################################################################################
 #
-# OCR image type 2
+# OCR image type 2 (old)
 # returns: tested
-def ocr_t(path_filename_in_, show_preview=False):
+def ocr_t_old(path_filename_in_, show_preview=True):
     # I can import packages inside a function, they are cached and are not re-imported unnecessarily.
     # Read image
     img = cv2.imread(path_filename_in_)
@@ -298,7 +298,7 @@ def ocr_t(path_filename_in_, show_preview=False):
    
 
     s1 = imgcut(img, ratio=0.55, keep='left')
-
+    
     
     ###########################
     # Preview window
@@ -364,8 +364,153 @@ def ocr_t(path_filename_in_, show_preview=False):
     # Convert to int; Only the 0-th element in the list is an actual number
     testy = int(output_list[0])
     
+        
     # Needed to correctly close preview windows, if used
     cv2.destroyAllWindows()
     
     return testy
+#######################################################################################
+#############################################################################################
+#
+# OCR image type 2
+# returns: tested, persons_tested
+def ocr_t(path_filename_in_, show_preview=False):
+    # I can import packages inside a function, they are cached and are not re-imported unnecessarily.
+    # Read image
+    img = cv2.imread(path_filename_in_)
+    
+    
+    # Get image width in pixels
+    height, width = getshape(img)
+   
+
+    s1 = imgcut(img, ratio=0.45, keep='left')
+    
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(s1)
+    ###########################
+     
+
+    s2 = imgcut(s1, ratio=0.30, keep='bottom')
+
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(s2)
+    ###########################
+
+    s3 = imgcut(s2, ratio=0.35, keep='top')
+    
+    ###########################
+    # Preview window
+    if show_preview: preview(s3)
+    ###########################
+
+        
+    # Take green channel to get rid of the red lines in the background
+    B, G, R = cv2.split(s3) 
+
+    ###########################
+    # Preview window
+    if show_preview: preview(G)
+    ###########################
+
+   
+    # Apply threshold to the image
+    mythreshold = 200 # custom threshold, adjusted for this particular image type
+    G1 = threshold(G, mythreshold)
+    ###########################
+    # Preview window
+    if show_preview: preview(G1, "Threshold")
+    ###########################
+
+    
+    
+    # Invert image
+    G2=G1 #invert(G1)
+    ###########################
+    # Preview window
+    if show_preview: preview(G2, "No invert")
+    ###########################
+
+    
+    # Tesseract configuration
+    custom_config = r'--oem 3 --psm 11 -l eng -c tessedit_char_whitelist=0123456789'
+
+    # OCR the image
+    output_str =pytesseract.image_to_string(G2, config=custom_config)
+    
+    # Split the string into a list by the dividers: '\n'
+    output_list=output_str.split('\n')
+    
+    # Remove empty elements
+    output_list = [i for i in output_list if i] 
+    
+    # Convert to int; Only the 0-th element in the list is an actual number
+    testy = int(output_list[0])
+    
+    
+    s4 = imgcut(img, ratio=0.57, keep='right')
+    ###########################
+    # Preview window
+    if show_preview: preview(s4, "Persons tested")
+    ###########################
+    s5 = imgcut(s4, ratio=0.3, keep='bottom')
+    ###########################
+    # Preview window
+    if show_preview: preview(s5, "Persons tested")
+    ###########################
+    s6 = imgcut(s5, ratio=0.3, keep='top')
+    ###########################
+    # Preview window
+    if show_preview: preview(s6, "Persons tested")
+    ###########################
+    s7 = imgcut(s6, ratio=0.4, keep='left')
+    ###########################
+    # Preview window
+    if show_preview: preview(s7, "Persons tested")
+    ###########################
+    # Take green channel to get rid of the red lines in the background
+    B_, G_, R_ = cv2.split(s7) 
+
+    ###########################
+    # Preview window
+    if show_preview: preview(G_)
+    ###########################
+
+   
+    # Apply threshold to the image
+    mythreshold = 200 # custom threshold, adjusted for this particular image type
+    G1_ = threshold(G_, mythreshold)
+    ###########################
+    # Preview window
+    if show_preview: preview(G1_, "Threshold")
+    ###########################
+
+    
+    
+    # Tesseract configuration
+    custom_config = r'--oem 3 --psm 11 -l eng -c tessedit_char_whitelist=0123456789'
+
+    # OCR the image
+    output_str =pytesseract.image_to_string(G1_, config=custom_config)
+    
+    # Split the string into a list by the dividers: '\n'
+    output_list=output_str.split('\n')
+    
+    # Remove empty elements
+    output_list = [i for i in output_list if i] 
+    
+    # Convert to int; Only the 0-th element in the list is an actual number
+    persons_tested = int(output_list[0])
+    
+    
+    
+    
+    # Needed to correctly close preview windows, if used
+    cv2.destroyAllWindows()
+    
+    return testy, persons_tested
 #######################################################################################
