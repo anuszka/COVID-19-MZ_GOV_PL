@@ -2,6 +2,11 @@
 
 # Change Log
 
+## [1.2.1] - 2020-05-01
+
+### Fixed
+   Slightly corrected display
+
 ## [1.2.0] - 2020-05-01
 2020.04.28: [Change of image format](https://twitter.com/MZ_GOV_PL/status/1255097510907072512) on Polish Health Ministry's Twitter @MZ_GOV_PL - number of tested persons added
 
