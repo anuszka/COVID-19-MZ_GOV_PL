@@ -87,6 +87,9 @@ For convenience of users, below I explain the cells content in `"Wydarzenia"` ("
 |"Dalsze restrykcje (zgromadzenia max 2 os.)" | "Further restrictions (public meetings  not allowed for more than 2 people)"|
 |"Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" | "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least  2 m in public, closing of hairdressing salons, etc.)"|
 |"Dalsze restrykcje (zasłanianie twarzy)"| "Further restrictions (face covering)"|
+|"Zniesienie części restrykcji (otwarcie parków i lasów, przemieszczanie rekreacyjne, sklepy i kościoły – więcej osób, swobodne przemieszczanie powyżej 13 roku życia)"|"Restrictions partially lifted (opening parks and forests, recreational movement allowed, more people allowed in shops and churches, free movement allowed > 13 y.o.)"|
+|"Zniesienie części restrykcji (otwarte hotele, galerie handlowe, biblioteki)"|"Restrictions partially lifted (open hotels, malls, libraries)"|
+|"Zniesienie części restrykcji (brak masek w przestrzeniach otwartych)"|"Restrictions partially lifted (no masks in the open air)"|
 
 Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary (perhaps this will be useful for copy-pasting into Python code): 
 `original_Polish_header : English_translation # comment` 
@@ -98,8 +101,17 @@ Here, cells content in `"Wydarzenia"` ("events") column is shown as a dictionary
   not allowed for more than 2 people)",
 "Kolejne restrykcje (zakaz wychodzenia młodzieży, 2 m odstępu, zamknięcie salonów fryzjerskich etc.)" : \
   "Next restrictions (going out not allowed for youth < 18 years old, maintain a distance of at least \
-  2 m in public, closing of hairdressing salons, etc.)"
-"Dalsze restrykcje (zasłanianie twarzy)" : "Further restrictions (face covering)"  
+  2 m in public, closing of hairdressing salons, etc.)",
+"Dalsze restrykcje (zasłanianie twarzy)" : "Further restrictions (face covering)" ,
+"Zniesienie części restrykcji (otwarcie parków i lasów, przemieszczanie rekreacyjne, sklepy i kościoły \
+– więcej osób, swobodne przemieszczanie powyżej 13 roku życia)":\
+"Restrictions partially lifted (opening parks and forests, recreational movement allowed, more people \
+allowed in shops and churches, free movement allowed > 13 y.o.)",
+"Zniesienie części restrykcji (otwarte hotele, galerie handlowe, biblioteki)":"Restrictions partially \
+lifted (open hotels, malls, libraries)",
+"Zniesienie części restrykcji (brak masek w przestrzeniach otwartych)":"Restrictions partially lifted \
+(no masks in the open air)"
+
 ```
 ### 2020-04-28: New data 
 Additional data are now shown on [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL) Twitter: Number of persons tested.
@@ -109,3 +121,7 @@ New column added in CSV data file: 'Testowane osoby' ('Persons tested').
 ### 2020-04-20: Data corrected!
 
 Correction to my data. There was a [supplementary Twitter message on April 7](https://twitter.com/MZ_GOV_PL/status/1247569463823732739), which I did not note. As a result, in my data files, part of the increase in the number of confirmed cases from April 7 erroneously moved to April 8. This has been corrected since [cor.2020.04.20.csv](https://github.com/anuszka/COVID-19-MZ_GOV_PL/blob/master/data/cor.2020.04.20.csv).
+
+### 2020-05-30: Data corrected!
+Correction to my data for 26-30.05.2020 in 'recovered'.
+
