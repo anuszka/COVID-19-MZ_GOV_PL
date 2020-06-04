@@ -1,3 +1,60 @@
+# Error
+twitter_scraper stopped working. I don't know how to fix it.
+```
+---------------------------------------------------------------
+Getting tweets from MZ_GOV_PL ...
+
+---------------------------------------------------------------------------
+JSONDecodeError                           Traceback (most recent call last)
+<ipython-input-1-84f6aa3eb5f7> in <module>
+----> 1 exec(open('../code/TwitterCaptureMZ_GOV_PL.py').read())
+
+<string> in <module>
+
+~/anaconda2/envs/python3.6/lib/python3.6/site-packages/twitter_scraper/modules/tweets.py in get_tweets(query, pages)
+    139             pages += -1
+    140 
+--> 141     yield from gen_tweets(pages)
+    142 
+    143 # for searching:
+
+~/anaconda2/envs/python3.6/lib/python3.6/site-packages/twitter_scraper/modules/tweets.py in gen_tweets(pages)
+     43         while pages > 0:
+     44             try:
+---> 45                 html = HTML(html=r.json()['items_html'],
+     46                             url='bunk', default_encoding='utf-8')      
+     47             except KeyError:
+
+~/anaconda2/envs/python3.6/lib/python3.6/site-packages/requests/models.py in json(self, **kwargs)
+    896                     # used.
+    897                     pass
+--> 898         return complexjson.loads(self.text, **kwargs)
+    899 
+    900     @property
+
+~/anaconda2/envs/python3.6/lib/python3.6/json/__init__.py in loads(s, encoding, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)
+    352             parse_int is None and parse_float is None and
+    353             parse_constant is None and object_pairs_hook is None and not kw):
+--> 354         return _default_decoder.decode(s)
+    355     if cls is None:
+    356         cls = JSONDecoder
+
+~/anaconda2/envs/python3.6/lib/python3.6/json/decoder.py in decode(self, s, _w)
+    337 
+    338         """
+--> 339         obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+    340         end = _w(s, end).end()
+    341         if end != len(s):
+
+~/anaconda2/envs/python3.6/lib/python3.6/json/decoder.py in raw_decode(self, s, idx)
+    355             obj, end = self.scan_once(s, idx)
+    356         except StopIteration as err:
+--> 357             raise JSONDecodeError("Expecting value", s, err.value) from None
+    358         return obj, end
+
+JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+```
 # COVID-19-MZ_GOV_PL
 COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL)
 
