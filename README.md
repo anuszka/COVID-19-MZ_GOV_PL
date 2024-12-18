@@ -1,4 +1,4 @@
-# COVID-19-MZ_GOV_PL (This project is no loner maintained)
+# COVID-19-MZ_GOV_PL (this project is no longer maintained)
 COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL)
 
 My plots of these data are here: [archived](https://web.archive.org/web/20231207090158/http://soft.ichf.edu.pl/ochab/coronavirus_poland/)
