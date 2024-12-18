@@ -1,9 +1,9 @@
 # COVID-19-MZ_GOV_PL (This project is no loner maintained)
 COVID-19 statistics for Poland, captured from Polish Health Ministry's Twitter [@MZ_GOV_PL](https://twitter.com/MZ_GOV_PL)
 
-My plots of these data are here: http://soft.ichf.edu.pl/ochab/coronavirus_poland/
+My plots of these data are here: [archived](https://web.archive.org/web/20231207090158/http://soft.ichf.edu.pl/ochab/coronavirus_poland/)
 
-For example, [my comments on the statistics for 2020.04.20 (in Polish)](http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.20.a/koronawirus_statystyki.2020.04.20.a.html).
+For example, [my comments on the statistics for 2020.04.20 (in Polish)](https://web.archive.org/web/20200803055411/http://soft.ichf.edu.pl/ochab/coronavirus_poland/2020.04.20.a/koronawirus_statystyki.2020.04.20.a.html).
 
 ## Why from Twitter
 
